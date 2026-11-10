@@ -1,0 +1,53 @@
+# ─────────────────────────────────────────────────────────────
+#  OH ALLEGEDLY — automated newsroom settings
+# ─────────────────────────────────────────────────────────────
+
+site:
+  name: "Oh Allegedly"
+  tagline: "The tea, the receipts, the timeline. Allegedly."
+  # Full public URL of the site (used in RSS + sitemap). No trailing slash.
+  base_url: "https://xongingobs-source.github.io/Oh-Allegedly-"
+  language: "en"
+  timezone: "Africa/Johannesburg"
+  # Stories newer than this many hours get the red BREAKING badge.
+  breaking_window_hours: 6
+  stories_on_homepage: 30
+
+youtube:
+  # Your channel ID starts with "UC". Find it at youtube.com/account_advanced
+  # or on the channel's "About > Share channel > Copy channel ID".
+  channel_ids:
+    - "UCxxxxxxxxxxxxxxxxxxxxxx"
+  # Optional: watch other channels too (e.g. creators you cover).
+  # Their videos become articles credited to them.
+  extra_channel_ids: []
+  # Skip Shorts (videos under this many seconds need the API key to detect).
+  skip_shorts: true
+  # Only process videos published in the last N days on the first run,
+  # so you don't burn credits converting your whole back-catalogue.
+  backfill_days: 14
+
+newsroom:
+  # Model used to turn transcripts into articles.
+  model: "claude-sonnet-5-5"
+  # "publish" = articles go live automatically.
+  # "draft"   = articles are written to content/drafts/ and wait for you
+  #             to move them to content/articles/ (recommended for
+  #             allegation-heavy content — see README "Legal safety").
+  mode: "publish"
+  # Max new articles per run (keeps API costs predictable).
+  max_articles_per_run: 5
+  # Section names the writer can pick from.
+  categories:
+    - "Breaking"
+    - "Creators"
+    - "Celebrity"
+    - "Court & Legal"
+    - "Internet Culture"
+    - "Livestream Recap"
+  # House style injected into the writing prompt.
+  style_notes: >
+    Punchy tabloid-newsroom energy but factually careful. Every claim
+    about a real person is attributed ("according to", "allegedly",
+    "claimed in the video"). Never state an allegation as fact.
+    Short paragraphs. British/South African spelling.

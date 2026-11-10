@@ -1,0 +1,48 @@
+{
+  "demo": true,
+  "slug": "duo-podcast-splits-after-five-years-host-hints-at-contract-row",
+  "headline": "Five years, one mic: 'Two Mics Deep' splits as host hints at contract row",
+  "dek": "One half of the fictional comedy podcast says he was 'locked out' of the channel \u2014 his co-host has yet to respond.",
+  "category": "Creators",
+  "tags": [
+    "podcasts",
+    "Two Mics Deep"
+  ],
+  "is_breaking": true,
+  "key_points": [
+    "Host claimed he lost access to the shared channel last week",
+    "Alleges a dispute over revenue split",
+    "Co-host has not commented publicly, per the video",
+    "Final episode had been recorded, he said"
+  ],
+  "timeline": [
+    {
+      "seconds": 15,
+      "label": "Cold open"
+    },
+    {
+      "seconds": 312,
+      "label": "The timeline begins"
+    },
+    {
+      "seconds": 1104,
+      "label": "The big claim"
+    },
+    {
+      "seconds": 1890,
+      "label": "Host's verdict"
+    }
+  ],
+  "body_markdown": "This is a sample story with invented people, generated so you can see the layout before the robot files real ones.\n\nOne half of the fictional comedy podcast says he was 'locked out' of the channel \u2014 his co-host has yet to respond. The details below come from the source video and have not been independently verified.\n\n### What was said\n\nAccording to the video, the dispute had been building for weeks before it spilled into public view. The host walked viewers through a timeline of posts and screenshots, stressing that much of it remains unconfirmed.\n\n> \"I'm only telling you what I've been shown \u2014 make your own mind up.\"\n\n### What happens next\n\nThe host said they had reached out for comment and would update viewers in a follow-up. Oh Allegedly will update this story if a response is received.\n\n### The commentary\n\nIn the opinion section of the video, the host argued the situation was a lesson in transparency for creator-led brands.",
+  "people": [],
+  "legal_risk": "low",
+  "video_id": null,
+  "video_url": "https://www.youtube.com/",
+  "video_title": "Sample video",
+  "thumbnail": null,
+  "source_channel": "Oh Allegedly",
+  "is_own_channel": true,
+  "was_livestream": false,
+  "published": "2026-11-10T09:14:44.182124+00:00",
+  "updated": "2026-11-10T09:14:44.182124+00:00"
+}

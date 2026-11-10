@@ -1,0 +1,49 @@
+{
+  "demo": true,
+  "slug": "glowbar-founder-addresses-refund-delays-on-stream",
+  "headline": "GlowBar founder addresses refund delays live on stream \u2014 fans say 'not good enough'",
+  "dek": "In a tense 40-minute livestream, the fictional skincare founder blamed a payment processor for weeks of missing refunds. Chat was not convinced.",
+  "category": "Breaking",
+  "tags": [
+    "GlowBar",
+    "refunds",
+    "creator brands"
+  ],
+  "is_breaking": true,
+  "key_points": [
+    "Founder claimed a 'processor freeze' caused refund delays, according to the stream",
+    "Says all refunds will land 'within 10 working days'",
+    "Several viewers in chat alleged they'd waited since August",
+    "No documents were shown on stream to back the processor claim"
+  ],
+  "timeline": [
+    {
+      "seconds": 15,
+      "label": "Cold open"
+    },
+    {
+      "seconds": 312,
+      "label": "The timeline begins"
+    },
+    {
+      "seconds": 1104,
+      "label": "The big claim"
+    },
+    {
+      "seconds": 1890,
+      "label": "Host's verdict"
+    }
+  ],
+  "body_markdown": "This is a sample story with invented people, generated so you can see the layout before the robot files real ones.\n\nIn a tense 40-minute livestream, the fictional skincare founder blamed a payment processor for weeks of missing refunds. Chat was not convinced. The details below come from the source video and have not been independently verified.\n\n### What was said\n\nAccording to the video, the dispute had been building for weeks before it spilled into public view. The host walked viewers through a timeline of posts and screenshots, stressing that much of it remains unconfirmed.\n\n> \"I'm only telling you what I've been shown \u2014 make your own mind up.\"\n\n### What happens next\n\nThe host said they had reached out for comment and would update viewers in a follow-up. Oh Allegedly will update this story if a response is received.\n\n### The commentary\n\nIn the opinion section of the video, the host argued the situation was a lesson in transparency for creator-led brands.",
+  "people": [],
+  "legal_risk": "low",
+  "video_id": null,
+  "video_url": "https://www.youtube.com/",
+  "video_title": "Sample video",
+  "thumbnail": null,
+  "source_channel": "Oh Allegedly",
+  "is_own_channel": true,
+  "was_livestream": true,
+  "published": "2026-11-10T11:38:44.182124+00:00",
+  "updated": "2026-11-10T11:38:44.182124+00:00"
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="{{ site.language }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site.name }} — {{ site.tagline }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ site.tagline }}{% endblock %}">
+{% block meta %}{% endblock %}
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ root }}feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ root }}static/style.css">
+</head>
+<body data-root="{{ root }}">
+
+<div class="ticker" aria-label="Latest headlines">
+  <span class="ticker__label">{% if live %}● LIVE{% else %}BREAKING{% endif %}</span>
+  <div class="ticker__track"><div class="ticker__inner">
+    {% for t in ticker %}<a href="{{ root }}story/{{ t.slug }}/">{{ t.headline }}</a><span class="ticker__sep">✦</span>{% endfor %}
+    {% for t in ticker %}<a href="{{ root }}story/{{ t.slug }}/" aria-hidden="true" tabindex="-1">{{ t.headline }}</a><span class="ticker__sep">✦</span>{% endfor %}
+  </div></div>
+</div>
+
+<header class="masthead">
+  <div class="masthead__top">
+    <span class="mono" id="today">{{ now.strftime('%A %d %B %Y') }}</span>
+    <span class="mono">Auto-updated from the channel · last refresh <time data-ago="{{ build_time }}">{{ build_time|ago }}</time></span>
+  </div>
+  <a class="masthead__logo" href="{{ root }}index.html">
+    <span class="logo-oh">OH</span><span class="logo-word">ALLEGEDLY</span><span class="logo-stamp">ALLEGEDLY*</span>
+  </a>
+  <p class="masthead__tag">{{ site.tagline }}</p>
+  <nav class="nav">
+    <a href="{{ root }}index.html">Front Page</a>
+    {% for s in sections if s['items'] %}<a href="{{ root }}section/{{ s.slug }}/">{{ s.name }}</a>{% endfor %}
+    <a href="{{ root }}briefing/">The Daily Tea</a>
+    <button class="nav__search" id="searchBtn" aria-label="Search">⌕ Search</button>
+  </nav>
+</header>
+
+<div id="liveBanner" class="live-banner" {% if not live %}hidden{% endif %}>
+  {% for s in live %}
+  <a class="live-banner__item" href="{{ s.url }}" target="_blank" rel="noopener">
+    <span class="live-dot"></span>
+    <strong>{{ 'LIVE NOW' if s.live_status == 'live' else 'STARTING SOON' }}</strong>
+    <span>{{ s.title }}</span>
+    <span class="mono">Watch on YouTube →</span>
+  </a>
+  {% endfor %}
+</div>
+
+<main class="wrap">{% block content %}{% endblock %}</main>
+
+<footer class="footer">
+  <div class="footer__logo">OH ALLEGEDLY</div>
+  <p>Stories on this site are generated automatically from the Oh Allegedly YouTube channel's videos and livestreams, then published by our newsroom robot. Every story links to the source video. Claims about people are reported as allegations made in the video, not established facts.</p>
+  <p class="mono">Spotted an error? Corrections: reply under the source video. · <a href="{{ root }}feed.xml">RSS</a></p>
+</footer>
+
+<dialog id="searchDlg" class="search">
+  <form method="dialog"><input id="searchInput" type="search" placeholder="Search the archive…" autocomplete="off"></form>
+  <ol id="searchResults"></ol>
+</dialog>
+
+<script src="{{ root }}static/app.js" defer></script>
+</body>
+</html>

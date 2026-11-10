@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ section.name }} | {{ site.name }}{% endblock %}
+{% block content %}
+<h1 class="section-title">{{ section.name }}</h1>
+{% if not section['items'] %}<p class="empty">Nothing filed here yet.</p>{% endif %}
+<div class="list">
+  {% for a in section['items'] %}
+  <article class="list__item">
+    <a href="{{ root }}story/{{ a.slug }}/" class="thumb" style="--seed: {{ loop.index }}">{% if a.thumbnail %}<img src="{{ a.thumbnail }}" alt="" loading="lazy">{% endif %}</a>
+    <div>
+      <div class="kicker">{% if a.breaking %}<span class="pill">Breaking</span>{% endif %}<time data-ago="{{ a.published }}">{{ a.published|ago }}</time></div>
+      <h2><a href="{{ root }}story/{{ a.slug }}/">{{ a.headline }}</a></h2>
+      <p>{{ a.dek }}</p>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

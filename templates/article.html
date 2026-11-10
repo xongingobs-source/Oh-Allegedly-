@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ a.headline }} | {{ site.name }}{% endblock %}
+{% block description %}{{ a.dek }}{% endblock %}
+{% block meta %}
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ a.headline }}">
+<meta property="og:description" content="{{ a.dek }}">
+{% if a.thumbnail %}<meta property="og:image" content="{{ a.thumbnail|replace('hqdefault', 'maxresdefault') }}">{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":{{ a.headline|tojson }},"description":{{ a.dek|tojson }},"datePublished":"{{ a.published }}","dateModified":"{{ a.updated or a.published }}"{% if a.thumbnail %},"image":["{{ a.thumbnail }}"]{% endif %},"publisher":{"@type":"Organization","name":{{ site.name|tojson }}}}</script>
+{% endblock %}
+{% block content %}
+<article class="story">
+  <header class="story__head">
+    <div class="kicker">
+      {% if a.breaking and a.category != "Breaking" %}<span class="pill">Breaking</span>{% endif %}
+      <a href="{{ root }}section/{{ a.section_slug }}/">{{ a.category }}</a>
+    </div>
+    <h1>{{ a.headline }}</h1>
+    <p class="story__dek">{{ a.dek }}</p>
+    <div class="byline mono">
+      <span>By the Oh Allegedly newsroom desk</span>
+      <span>Filed <time datetime="{{ a.published }}">{{ a.published|nice_date }}</time></span>
+      {% if a.demo %}<span class="pill pill--ghost">Sample story</span>{% endif %}
+    </div>
+  </header>
+
+  <div class="story__layout">
+    <div class="story__main">
+      {% if a.video_id and not a.demo %}
+      <div class="player"><iframe id="ytplayer" src="https://www.youtube-nocookie.com/embed/{{ a.video_id }}?enablejsapi=1&rel=0" title="{{ a.video_title }}" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      {% else %}
+      <div class="player player--placeholder thumb" style="--seed: 3"><span class="mono">▶ Source video embeds here</span></div>
+      {% endif %}
+      <p class="source mono">Source: <a href="{{ a.video_url }}" target="_blank" rel="noopener">“{{ a.video_title }}”</a> — {{ a.source_channel }}{% if a.was_livestream %} (livestream){% endif %}</p>
+
+      <div class="story__body">{{ a.body_html|safe }}</div>
+
+      <p class="disclaimer">This story was produced automatically from the transcript of the source video. Claims about individuals are reported as made in the video and have not been independently verified. {% if not a.is_own_channel %}Original reporting by {{ a.source_channel }}.{% endif %}</p>
+
+      {% if a.tags %}<div class="tags">{% for t in a.tags %}<span>#{{ t }}</span>{% endfor %}</div>{% endif %}
+    </div>
+
+    <aside class="story__side">
+      <section class="receipts">
+        <h2>The Receipts</h2>
+        <ul>{% for p in a.key_points %}<li>{{ p }}</li>{% endfor %}</ul>
+      </section>
+      {% if a.timeline %}
+      <section class="timeline">
+        <h2>Jump to the moment</h2>
+        <ol>{% for t in a.timeline %}
+          <li><a href="{{ a.video_url }}&t={{ t.seconds }}s" data-seek="{{ t.seconds }}" target="_blank" rel="noopener"><span class="mono">{{ t.seconds|ts }}</span> {{ t.label }}</a></li>
+        {% endfor %}</ol>
+      </section>
+      {% endif %}
+      <button class="share" data-share>Share this story ↗</button>
+    </aside>
+  </div>
+
+  {% if related %}
+  <section class="related">
+    <h2 class="rule-head">More like this</h2>
+    <div class="strip__row">
+      {% for r in related %}<a class="strip__item" href="{{ root }}story/{{ r.slug }}/"><time class="mono">{{ r.published|ago }}</time><strong>{{ r.headline }}</strong></a>{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</article>
+{% endblock %}

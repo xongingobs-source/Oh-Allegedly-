@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not articles %}
+  <section class="empty">
+    <h1>The newsroom is warming up.</h1>
+    <p>No stories yet — the robot will file the first ones after the next channel upload.</p>
+  </section>
+{% else %}
+{% set lead = articles[0] %}
+<section class="front">
+  <article class="lead">
+    <a href="{{ root }}story/{{ lead.slug }}/" class="lead__media thumb" style="--seed: 0">
+      {% if lead.thumbnail %}<img src="{{ lead.thumbnail }}" alt="" loading="eager">{% endif %}
+      {% if lead.breaking %}<span class="badge badge--breaking">Breaking</span>{% endif %}
+      {% if lead.was_livestream %}<span class="badge badge--live">Stream recap</span>{% endif %}
+    </a>
+    <div class="kicker"><a href="{{ root }}section/{{ lead.section_slug }}/">{{ lead.category }}</a> <time data-ago="{{ lead.published }}">{{ lead.published|ago }}</time></div>
+    <h1 class="lead__hed"><a href="{{ root }}story/{{ lead.slug }}/">{{ lead.headline }}</a></h1>
+    <p class="lead__dek">{{ lead.dek }}</p>
+    <ul class="lead__points">{% for p in lead.key_points[:3] %}<li>{{ p }}</li>{% endfor %}</ul>
+  </article>
+
+  <aside class="latest">
+    <h2 class="rule-head">Latest <span class="mono">auto-filed</span></h2>
+    <ol>
+      {% for a in articles[1:9] %}
+      <li>
+        <time class="mono" data-ago="{{ a.published }}">{{ a.published|ago }}</time>
+        {% if a.breaking %}<span class="pill">Breaking</span>{% endif %}
+        <a href="{{ root }}story/{{ a.slug }}/">{{ a.headline }}</a>
+      </li>
+      {% endfor %}
+    </ol>
+  </aside>
+</section>
+
+{% if digest %}
+<section class="tea">
+  <div class="tea__label">The Daily Tea <span class="mono">{{ digest.date }}</span></div>
+  <div>
+    <h2>{{ digest.headline }}</h2>
+    <p>{{ digest.intro }}</p>
+    <a class="mono" href="{{ root }}briefing/">Read today's briefing →</a>
+  </div>
+</section>
+{% endif %}
+
+<section class="grid">
+  {% for a in articles[1:13] %}
+  <article class="card {% if loop.index == 1 %}card--wide{% endif %}">
+    <a href="{{ root }}story/{{ a.slug }}/" class="thumb" style="--seed: {{ loop.index }}">
+      {% if a.thumbnail %}<img src="{{ a.thumbnail }}" alt="" loading="lazy">{% endif %}
+      {% if a.breaking %}<span class="badge badge--breaking">Breaking</span>{% elif a.was_livestream %}<span class="badge badge--live">Stream recap</span>{% endif %}
+    </a>
+    <div class="kicker"><a href="{{ root }}section/{{ a.section_slug }}/">{{ a.category }}</a></div>
+    <h3><a href="{{ root }}story/{{ a.slug }}/">{{ a.headline }}</a></h3>
+    <p>{{ a.dek }}</p>
+  </article>
+  {% endfor %}
+</section>
+
+{% for s in sections if s['items']|length > 1 %}
+<section class="strip">
+  <h2 class="rule-head"><a href="{{ root }}section/{{ s.slug }}/">{{ s.name }}</a> <span class="mono">{{ s['items']|length }} stories →</span></h2>
+  <div class="strip__row">
+    {% for a in s['items'][:4] %}
+    <a class="strip__item" href="{{ root }}story/{{ a.slug }}/">
+      <time class="mono">{{ a.published|ago }}</time>
+      <strong>{{ a.headline }}</strong>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endif %}
+{% endblock %}

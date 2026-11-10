@@ -1,0 +1,24 @@
+{
+  "demo": true,
+  "date": "2026-11-10",
+  "headline": "Refund rage, a podcast split and a memoir row",
+  "intro": "A busy day on the timeline. Here's everything the channel covered in the last 24 hours \u2014 allegedly.",
+  "items": [
+    {
+      "slug": "glowbar-founder-addresses-refund-delays-on-stream",
+      "blurb": "In a tense 40-minute livestream, the fictional skincare founder blamed a payment processor for weeks of missing refunds. Chat was not convinced."
+    },
+    {
+      "slug": "duo-podcast-splits-after-five-years-host-hints-at-contract-row",
+      "blurb": "One half of the fictional comedy podcast says he was 'locked out' of the channel \u2014 his co-host has yet to respond."
+    },
+    {
+      "slug": "reality-star-denies-ghostwritten-memoir-claims",
+      "blurb": "A former contestant on a fictional dating show pushed back on claims that a ghostwriter did the heavy lifting."
+    },
+    {
+      "slug": "small-claims-court-date-set-in-gaming-sponsorship-dispute",
+      "blurb": "The fictional streamer says a peripherals brand owes her three months of fees; the brand allegedly says she broke exclusivity."
+    }
+  ]
+}

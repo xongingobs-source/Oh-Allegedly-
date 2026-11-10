@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}The Daily Tea | {{ site.name }}{% endblock %}
+{% block content %}
+<h1 class="section-title">The Daily Tea</h1>
+{% if not digests %}<p class="empty">The first daily briefing is written once there are two or more new stories in a day.</p>{% endif %}
+{% for d in digests %}
+<section class="briefing">
+  <div class="mono briefing__date">{{ d.date }}</div>
+  <h2>{{ d.headline }}</h2>
+  <p class="briefing__intro">{{ d.intro }}</p>
+  <ol>
+    {% for it in d['items'] if it.slug in by_slug %}
+    <li><a href="{{ root }}story/{{ it.slug }}/"><strong>{{ by_slug[it.slug].headline }}</strong></a> — {{ it.blurb }}</li>
+    {% endfor %}
+  </ol>
+</section>
+{% endfor %}
+{% endblock %}
