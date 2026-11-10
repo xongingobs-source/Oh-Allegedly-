@@ -28,15 +28,23 @@ youtube:
   backfill_days: 14
 
 newsroom:
-  # Model used to turn transcripts into articles.
-  model: "claude-sonnet-5-5"
+  # Which AI writes the stories, tried in order until one works.
+  #   github = FREE GitHub Models (no key, no card — uses your repo's built-in token)
+  #   gemini = FREE Google Gemini (needs a free GEMINI_API_KEY from aistudio.google.com)
+  #   claude = paid Anthropic Claude (only used if ANTHROPIC_API_KEY is set)
+  #   basic  = no AI: a simple "new video" post from the title, description and transcript
+  providers: ["github", "gemini", "basic"]
+  models:
+    github: "openai/gpt-4o-mini"      # free "low" tier: ~150 requests/day
+    gemini: "gemini-flash-latest"
+    claude: "claude-sonnet-5-5"
   # "publish" = articles go live automatically.
   # "draft"   = articles are written to content/drafts/ and wait for you
   #             to move them to content/articles/ (recommended for
   #             allegation-heavy content — see README "Legal safety").
   mode: "publish"
-  # Max new articles per run (keeps API costs predictable).
-  max_articles_per_run: 5
+  # Max new articles per run (keeps you inside the free daily limits).
+  max_articles_per_run: 3
   # Section names the writer can pick from.
   categories:
     - "Breaking"

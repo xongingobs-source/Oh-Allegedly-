@@ -131,7 +131,8 @@ def process(cfg: dict, state: dict, only_video: str | None = None) -> int:
             art = write_article(v, yt.transcript_to_text(segs), cfg)
         except Exception as e:  # noqa: BLE001
             rec["attempts"] += 1
-            rec["status"] = "pending"; rec["reason"] = f"writer error: {e}"
+            rec["status"] = "pending" if rec["attempts"] < MAX_TRANSCRIPT_ATTEMPTS else "failed"
+            rec["reason"] = f"writer error: {str(e)[:300]}"
             log(f"✗ writer failed for {vid}: {e}")
             continue
 
@@ -190,8 +191,8 @@ def main(argv=None):
 
     if not args.build:
         import os
-        if not os.environ.get("ANTHROPIC_API_KEY"):
-            log("✗ ANTHROPIC_API_KEY not set — run with --build to only rebuild"); sys.exit(1)
+        if not any(os.environ.get(k) for k in ("GITHUB_TOKEN", "GH_MODELS_TOKEN", "GEMINI_API_KEY", "ANTHROPIC_API_KEY")):
+            log("⚠ no AI token found — stories will use the no-AI 'basic' format")
         state = load_state()
         n = process(cfg, state, args.video)
         save_state(state)

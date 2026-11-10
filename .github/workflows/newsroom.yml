@@ -16,6 +16,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  models: read        # free GitHub Models AI — no API key needed
 
 concurrency:
   group: newsroom
@@ -37,7 +38,9 @@ jobs:
       - name: Check YouTube & write stories
         if: github.event_name != 'push'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          # free AI writer (built in, nothing to set up)
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}      # optional free backup writer
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }} # optional paid writer
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           TRANSCRIPT_PROXY_URL: ${{ secrets.TRANSCRIPT_PROXY_URL }}
         run: |
